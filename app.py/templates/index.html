@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prediksi Harga Lele</title>
+  </head>
+  <body>
+    <h1>Prediksi Harga Lele</h1>
+    <form action="/predict" method="POST">
+      <label for="province">Pilih Provinsi:</label>
+      <select name="province" id="province">
+        <option value="JAWA BARAT">JAWA BARAT</option>
+        <option value="JAWA TENGAH">JAWA TENGAH</option>
+        <option value="JAWA TIMUR">JAWA TIMUR</option></select
+      ><br /><br />
+
+      <label for="city">Pilih Kota:</label>
+      <select name="city" id="city">
+        <option value="">Pilih Provinsi terlebih dahulu</option></select
+      ><br /><br />
+
+      <label for="years">Jumlah Tahun untuk Prediksi:</label>
+      <input
+        type="number"
+        id="years"
+        name="years"
+        min="1"
+        required
+      /><br /><br />
+
+      <input type="submit" value="Prediksi" />
+    </form>
+
+    <script>
+      // Daftar kota per provinsi
+      const validCities = {
+        "JAWA BARAT": ["Bandung", "Cirebon", "Bogor"],
+        "JAWA TENGAH": ["Semarang", "Magelang"],
+        "JAWA TIMUR": ["Surabaya", "Malang"],
+      };
+
+      // Fungsi untuk mengupdate pilihan kota berdasarkan provinsi yang dipilih
+      function updateCityOptions() {
+        const province = document.getElementById("province").value;
+        const citySelect = document.getElementById("city");
+        const cities = validCities[province] || [];
+
+        // Kosongkan opsi kota
+        citySelect.innerHTML = "";
+
+        // Tambahkan opsi default
+        const defaultOption = document.createElement("option");
+        defaultOption.value = "";
+        defaultOption.textContent = "Pilih Kota";
+        citySelect.appendChild(defaultOption);
+
+        // Tambahkan kota yang sesuai
+        cities.forEach((city) => {
+          const option = document.createElement("option");
+          option.value = city;
+          option.textContent = city;
+          citySelect.appendChild(option);
+        });
+      }
+
+      // Update kota saat provinsi dipilih
+      document
+        .getElementById("province")
+        .addEventListener("change", updateCityOptions);
+    </script>
+  </body>
+</html>

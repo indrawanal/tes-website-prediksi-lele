@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hasil Prediksi</title>
+  </head>
+  <body>
+    <h1>Hasil Prediksi Harga Lele</h1>
+
+    <h2>Hasil Prediksi untuk {{ years }} Tahun ke Depan:</h2>
+
+    <h3>Prediksi Bulanan:</h3>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Bulan</th>
+          <th>Harga Prediksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for pred in predictions['monthly_predictions'] %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td>{{ pred | round(2) }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <h3>Rata-Rata Harga per Tahun:</h3>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Tahun</th>
+          <th>Rata-Rata Harga</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for avg in predictions['yearly_averages'] %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td>{{ avg | round(2) }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <br />
+    <a href="/">Kembali</a>
+  </body>
+</html>
