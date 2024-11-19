@@ -73,7 +73,14 @@ def predict():
             "yearly_averages": yearly_averages,
         }
 
-        return render_template('result.html', predictions=predictions_list, years=n_years)
+        # Tambahkan province dan city ke konteks render template
+        return render_template(
+            'result.html', 
+            predictions=predictions_list, 
+            years=n_years, 
+            province=province, 
+            city=city
+        )
 
     except Exception as e:
         return f"Error: {str(e)}"

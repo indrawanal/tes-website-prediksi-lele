@@ -4,14 +4,66 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hasil Prediksi</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        padding: 0;
+      }
+      h1 {
+        color: #2c3e50;
+      }
+      h2,
+      h3 {
+        color: #34495e;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+      }
+      table,
+      th,
+      td {
+        border: 1px solid #bdc3c7;
+      }
+      th,
+      td {
+        padding: 10px;
+        text-align: center;
+      }
+      th {
+        background-color: #ecf0f1;
+      }
+      a {
+        text-decoration: none;
+        color: #3498db;
+        font-weight: bold;
+      }
+      a:hover {
+        color: #2980b9;
+      }
+      .info-box {
+        margin-bottom: 20px;
+        padding: 10px;
+        background-color: #f4f6f7;
+        border: 1px solid #dcdde1;
+        border-radius: 5px;
+      }
+    </style>
   </head>
   <body>
     <h1>Hasil Prediksi Harga Lele</h1>
 
+    <!-- Menampilkan nama kota dan provinsi -->
+    <div class="info-box">
+      <h2>Lokasi: {{ city }}, {{ province }}</h2>
+    </div>
+
     <h2>Hasil Prediksi untuk {{ years }} Tahun ke Depan:</h2>
 
     <h3>Prediksi Bulanan:</h3>
-    <table border="1">
+    <table>
       <thead>
         <tr>
           <th>Bulan</th>
@@ -29,7 +81,7 @@
     </table>
 
     <h3>Rata-Rata Harga per Tahun:</h3>
-    <table border="1">
+    <table>
       <thead>
         <tr>
           <th>Tahun</th>
