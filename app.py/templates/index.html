@@ -1,162 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Prediksi Harga Lele</title>
-    <style>
-      /* General Reset */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f9;
-        color: #333;
-        padding: 20px;
-      }
-
-      h1 {
-        text-align: center;
-        margin-bottom: 20px;
-        color: #2c3e50;
-      }
-
-      form {
-        background: #fff;
-        padding: 20px;
-        max-width: 400px;
-        margin: 0 auto;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        border-radius: 10px;
-      }
-
-      label {
-        font-weight: bold;
-        display: block;
-        margin-bottom: 10px;
-        color: #34495e;
-      }
-
-      select,
-      input[type="number"],
-      input[type="submit"] {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 20px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        font-size: 1rem;
-      }
-
-      select:focus,
-      input[type="number"]:focus {
-        outline: none;
-        border-color: #3498db;
-        box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
-      }
-
-      input[type="submit"] {
-        background-color: #3498db;
-        color: #fff;
-        font-weight: bold;
-        border: none;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-      }
-
-      input[type="submit"]:hover {
-        background-color: #2980b9;
-      }
-
-      .form-footer {
-        text-align: center;
-        font-size: 0.9rem;
-        color: #7f8c8d;
-      }
-
-      .form-footer a {
-        text-decoration: none;
-        color: #3498db;
-      }
-
-      .form-footer a:hover {
-        color: #2980b9;
-      }
-    </style>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.min.css"
+    />
   </head>
   <body>
-    <h1>Prediksi Harga Lele</h1>
-    <form action="/predict" method="POST">
-      <label for="province">Pilih Provinsi:</label>
-      <select name="province" id="province">
-        <option value="JAWA BARAT">JAWA BARAT</option>
-        <option value="JAWA TENGAH">JAWA TENGAH</option>
-        <option value="JAWA TIMUR">JAWA TIMUR</option>
-      </select>
+    <div class="container">
+      <h1>Prediksi Harga Lele</h1>
 
-      <label for="city">Pilih Kota:</label>
-      <select name="city" id="city">
-        <option value="">Pilih Provinsi terlebih dahulu</option>
-      </select>
-
-      <label for="years">Jumlah Tahun untuk Prediksi:</label>
-      <input
-        type="number"
-        id="years"
-        name="years"
-        min="1"
-        placeholder="Masukkan jumlah tahun"
-        required
-      />
-
-      <input type="submit" value="Prediksi" />
-    </form>
-    <div class="form-footer">
-      <p>NusAira Copyright © 2024 - Prediksi Harga Lele</p>
-      <p>
-        <a href="/">Kembali ke Beranda</a>
-      </p>
+      {% for city, graph_html in predictions_for_cities.items() %}
+      <h2>Prediksi Harga Lele di {{ city }}</h2>
+      <div>{{ graph_html | safe }}</div>
+      {% endfor %}
     </div>
-    <script>
-      // Daftar kota per provinsi
-      const validCities = {
-        "JAWA BARAT": ["Bandung", "Cirebon", "Bogor"],
-        "JAWA TENGAH": ["Semarang", "Magelang"],
-        "JAWA TIMUR": ["Surabaya", "Malang"],
-      };
-
-      // Fungsi untuk mengupdate pilihan kota berdasarkan provinsi yang dipilih
-      function updateCityOptions() {
-        const province = document.getElementById("province").value;
-        const citySelect = document.getElementById("city");
-        const cities = validCities[province] || [];
-
-        // Kosongkan opsi kota
-        citySelect.innerHTML = "";
-
-        // Tambahkan opsi default
-        const defaultOption = document.createElement("option");
-        defaultOption.value = "";
-        defaultOption.textContent = "Pilih Kota";
-        citySelect.appendChild(defaultOption);
-
-        // Tambahkan kota yang sesuai
-        cities.forEach((city) => {
-          const option = document.createElement("option");
-          option.value = city;
-          option.textContent = city;
-          citySelect.appendChild(option);
-        });
-      }
-
-      // Update kota saat provinsi dipilih
-      document
-        .getElementById("province")
-        .addEventListener("change", updateCityOptions);
-    </script>
   </body>
 </html>
